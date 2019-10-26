@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: tut-service
+spec:
+  selector:
+    app: service-tut-pod
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: http

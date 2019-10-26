@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sel-pod-2
+  namespace: myns
+spec:
+  nodeSelector:
+    app: ui
+  containers:
+  - name: cont3
+    image: nginx:alpine

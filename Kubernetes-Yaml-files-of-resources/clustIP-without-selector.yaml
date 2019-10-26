@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-svc
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9376
+
+---
+
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: my-svc
+subsets:
+- addresses:
+  - ip: 1.2.3.4
+  ports:
+  - port: 9376

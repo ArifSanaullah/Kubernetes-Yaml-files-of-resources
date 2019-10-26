@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job
+spec:
+  template:
+    metadata:
+      name: job-pod
+    spec:
+      containers:
+      - image: luksa/batch-job
+        name: main
+      restartPolicy: OnFailure

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-pod
+  annotations:
+    email: ak7896023@gmail.com
+  labels:
+    app: front-end
+spec:
+  containers:
+    - image: nginx
+      name: pod-container
+      ports:
+      - containerPort: 80
+        name: http

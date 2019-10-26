@@ -1,0 +1,22 @@
+1]pod > a single smallest entity in kubenetes.
+2]node > a hardware or virtual device.
+3]cluster > a group of cluster.
+4]there are two types of nodes > 1 master node , 2 worker node.
+5]alias.
+6]pods > one pod containes one container and one service usually, all containers on a pod will work on a same logical machine appearntly, why pods? we 		dont want to group multiple services or container, a construct to bind all dependent containers in a group is pod. all containers contains 		same ip but different pod numbers.
+when to run containers together?
+	do they need to run together or can they manage seperately?
+	do they represent a single while or ther are independent components?
+	must they be scaled together or individually?
+7]apiverion > api group or api version
+  kind > type of resource
+  metadata > data about resource
+  spec > resources of resource
+  status > status of resource
+8] portforwarding > external_port:container_port (8008:80)
+9] labels >1)labeling, 2)pods listing with label selector > (contains, not contains, contains a key, not contains a value)
+10] replicasets
+11] editing yaml file
+12] applying yaml file
+13] pods scaling
+14] job

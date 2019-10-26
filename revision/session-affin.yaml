@@ -1,0 +1,57 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  labels:
+    app: session-affinity
+  name: session-affinity
+spec:
+  rules:
+  - host: sess.192.168.64.5.nip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: session-affinity
+          servicePort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: session-affinity
+  labels:
+    app: session-affinity
+  annotations:
+    traefik.ingress.kubernetes.io/affinity: "true"
+    traefik.ingress.kubernetes.io/session-cookie-name: "sticky"
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: session-affinity-demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session-affinity-demo
+  labels:
+    app: session-affinity-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: session-affinity-demo
+  template:
+    metadata:
+      labels:
+        app: session-affinity-demo
+    spec:
+      containers:
+      - name: session-affinity-demo
+        image: zhiminwen/session-sticky:v1.0

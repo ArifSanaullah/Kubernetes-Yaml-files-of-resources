@@ -1,0 +1,34 @@
+# a comment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx          # arbitrary label on deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:        # labels the replica selector should match
+      test: liveness
+  template:
+    metadata:
+      labels:
+        test: liveness      # label for replica selector to match
+      name: liveness-exec  # arbitrary label we can match on elsewhere
+    spec:
+      containers:
+      - name: liveness
+        image: k8s.gcr.io/busybox
+        ports:
+        - containerPort: 80
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5

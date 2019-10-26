@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ns-pod
+  labels:
+    app: ci
+    rel: stable
+spec:
+  nodeSelector:
+    app: stable
+  containers:
+  - image: alpine
+    name: cont1
+    ports:
+    - containerPort: 80
+  restartPolicy: Never

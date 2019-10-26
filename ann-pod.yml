@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annot-pod
+  annotations:
+    createdby: arif
+    email: ak7896023@gmail.com
+spec:
+  containers:
+  - name: annot-name
+    image: nginx:alpine

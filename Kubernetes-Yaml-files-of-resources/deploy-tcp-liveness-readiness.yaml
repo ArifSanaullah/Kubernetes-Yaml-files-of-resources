@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tcp-liveness-readiness.deployment
+spec:
+  selector:
+    matchLabels:
+      test: tcp-liveness-readiness
+  template:
+    metadata:
+      name: tcp-liveness-readiness-pod
+      labels:
+        test: tcp-liveness-readiness
+    spec:
+      containers:
+      - name: tcp-liveness-readiness-container
+        image: k8s.gcr.io/goproxy:0.1
+        ports:      
+          - containerPort: 8080
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 15
